@@ -5,8 +5,7 @@ This repository contains the LaTeX source for my undergraduate thesis at Western
 The example code used for demonstration purposes in the thesis can be found in the following repositories:
 - [HCE Inference Server](https://github.com/LordExodius/HCE-inference-server)
 - [HCE Web Server](https://github.com/LordExodius/HCE-web-server)
-- HCE Training Server
-- HCE Client
+- [HCE Client](https://github.com/LordExodius/HCE-client)
 
 ## Meta
 **Author:** Yan (Oscar) Yu\
