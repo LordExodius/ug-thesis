@@ -1,6 +1,7 @@
 \documentclass[11pt]{article}
 \usepackage[width=150mm]{geometry}
 \usepackage{graphicx}
+\usepackage{float} 
 
 % Include graphics in answer
 \newcommand{\nocapfigure}[2][0.5] {
@@ -19,7 +20,7 @@
 }
 
 % About
-\title{Designing Microservice-based Applications for Hybrid Cloud Edge Networks}
+\title{Optimizing Microservice-based Applications for Cloud and Edge Networks}
 \author{Yan (Oscar) Yu}
 \date{\today}
 
@@ -30,17 +31,17 @@
 \addcontentsline{toc}{section}{Abstract}
 \section*{Abstract}
 
-Edge computing has been the subject of much attention in the software
-development space over the last several years as the limitations of traditional cloud computing 
-models continue to be exposed by an increasing number of connected IoT and internet-enabled 
-devices that require real-time computing. As this new computing paradigm becomes more prevalent 
-in the industry, it is important that software is developed effectively to take advantage of the
-benefits that edge computing brings to the table.
+Edge computing has been the subject of much attention in the software development space over the 
+last several years as the limitations of traditional cloud computing models continue to be exposed 
+by an increasing number of connected IoT and internet-enabled devices that require real-time 
+computing. As this new computing paradigm becomes more prevalent in the industry, it is important 
+that software is developed effectively to take advantage of the benefits that edge computing 
+brings to the table.
 \newline
 
 In this paper, we attempt to establish an understanding of core principles that will enable the 
 effective design and development of distributed software systems that can be easily deployed and 
-optimized for various configurations of computing models -- primarily hybrid cloud edge networks.
+optimized for various architectures of computing models -- primarily hybrid cloud edge networks.
 \newline
 
 \newpage
@@ -51,42 +52,75 @@ optimized for various configurations of computing models -- primarily hybrid clo
 
 \newpage
 \section{Background and Related Work}
+This thesis is based on existing work in multiple fields, including 
+\subsection{Cloud Computing}
+\subsection{Edge Computing}
+\subsection{Microservice Architecture}
 
 \newpage
 \section{Research Objectives}
 \begin{itemize}
-    \item {
-        To develop a demo application with the ability to conditionally and automatically self 
-        optimize in various network configurations.
+    \item [(O1)] {
+        Understand what applications may benefit from deployment to edge networks
         }
-    \item { 
-        Using this demo application:
-        \subitem Determine the feasibility of using this approach in production environements
-            \subsubitem What type of application can be designed this way?
-            \subsubitem Is it possible to adapt existing applications to this framework?
-        \subitem Analyze the benefits provided by self optimization 
-            \subsubitem Platform compatibility
-            \subsubitem Latency improvements
-        \subitem Analyze the tradeoffs compared to traditional software design paradigms
-            \subsubitem Additional development time
-            \subsubitem Added complexity in maintainence
-            \subsubitem Additional computing overhead
-        \subitem Determine suitable environements in which this may be desired (if any)
-    }
+    \item [(O2)] {
+        Understand how to identify performance characteristics of individual components within
+        a software application
+        }
+    \item [(O3)] {
+        Understand how applications can be developed to optimize for deployment across different 
+        network architectures
+        }
+    \item [(O4)] {
+        Understand how various hosting patterns can affect latency and user experience
+        }
 \end{itemize}
 
 \newpage
 \section{Methodology}
-In order to 
+\subsection{Application Development}
+Not all software is created equally, with a vast range of performance characteristics and
+behaviour across various applications when developed for differing use cases. For the purposes
+of demonstrating this behaviour in order to identify favourable conditions for edge deployments, 
+we develop a minimal microservice-architecture application for real-time object recognition 
+consisting of a web interface, API gateway/web server, and an inference service. (O1)\newline
+
+\capfigure[0.75]{images/applicationdesign1}{Example architecture}
+
+Real-time object recognition using a CNN like
+
+\subsection{Deployment Architecture(s)}
+To demonstrate the feasability of developing an application compatible with multiple network 
+architectures and gather data regarding the performance of an identical application across multiple
+architectures, we
+
+\subsection{Performance Analytics}
 
 \newpage
 \section{Results}
+\subsection{Test Application}
+\subsection{Data}
+The graphs below show the latency data collected from deploying the sample application across 3
+different configurations of cloud and simulated edge compute servers
+\nocapfigure[]{images/latency1}
+\nocapfigure[]{images/latency2}
+\subsection{Latency Differences}
 
 \newpage
 \section{Discussion}
+\subsection{Implications}
+\subsection{Limitations and Generalizations}
+- Hardware limitations
+- Limited model selection
+- Relatively simple system design
+- Lack of edge deployments
+- No service level latency monitoring
+- Lack of cloud hardware control 
+- Only latency measurements, no hardware usage or identification of other bottlenecks
 
 \newpage
 \section{Conclusions and Future Work}
+- Perform more analysis with more performance analytics
 
 \newpage
 \section{Reference List}
