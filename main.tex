@@ -108,19 +108,19 @@ the application's various components. (O1)\newline
 \capfigure[0.75]{images/applicationdesign1}{Sample application architecture for object recognition.}
 
 As shown Figure 1, the application is composed of a web interface, API gateway/web server, 
-and the inference service. In line with (O3), the web server and inference service were 
-containerized using Docker in order to enable configurable, platform agnostic deployment.\newline
+and the inference service. The web server and inference service were containerized using Docker 
+in order to enable configurable, platform agnostic deployment. (O3)\newline
 
 The three components depend heavily on network bandwidth, as the client passes image data to the
 web server, which forwards it to the inference service for processing. Despite preprocessing on the 
 client side to downscale snapshot resolution to 640 x 480, each request to the web server contains 
-over 20 kilobytes of image data. \newline
+over 20 kilobytes of image data. (O2) \newline
 
 In a realistic scenario, 1080p real-time video analysis will require anywhere from 24-120 requests 
 per second. With a 1920x1080 snapshot being around 2 megabytes, this results in a lower bound for 
 bandwidth of of 384 Mbps, or an upper bound of 1.92 Gbps. As a result, this type of application is 
 an extremely good candidate for edge deployments, and could see significant improvements in
-various performance metrics.
+various performance metrics. (O1, O2)
 
 \subsubsection{Inference Service}
 To enable interfacing with a pre-trained object detection model, we leverage the open source
@@ -138,7 +138,7 @@ which was a constraint due to limited cloud hosting resources available at the t
 Despite the limited scale of this model, inference through a CNN (Convolutional Neural Network) 
 remains a compute intensive task that will likely be a performance bottleneck that scales with 
 hardware performance on the host device, as the process relies on large numbers (see: billions) 
-of parallel matrix operations.\newline
+of parallel matrix operations. (O2)\newline
 
 A note regarding the configuration of this service: while the option to run the service with GPU 
 acceleration was available, the CPU-only deployment was chosen to reduce additional variables 
@@ -190,7 +190,7 @@ process.\newline
 To demonstrate the feasibility of developing an application compatible with multiple network 
 architectures and gather data regarding the performance of an identical application on different
 architectures, the web server and inference service were deployed in three configurations across 
-a cloud host and locally, to emulate an edge server.
+a cloud host and locally, to emulate an edge server. (O3)
 
 \begin{enumerate}
     \item {
