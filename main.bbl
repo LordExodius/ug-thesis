@@ -1,0 +1,54 @@
+\begin{thebibliography}{10}
+
+\bibitem{auer_monolithic_2021}
+Florian Auer, Valentina Lenarduzzi, Michael Felderer, and Davide Taibi.
+\newblock From monolithic systems to {Microservices}: {An} assessment framework.
+\newblock {\em Information and Software Technology}, 137:106600, September 2021.
+
+\bibitem{copeland_whats_2016}
+Michael Copeland.
+\newblock What’s the {Difference} {Between} {Deep} {Learning} {Training} and {Inference}?, August 2016.
+
+\bibitem{9229154}
+S.~George, T.~Eiszler, R.~Iyengar, H.~Turki, Z.~Feng, J.~Wang, P.~Pillai, and M.~Satyanarayanan.
+\newblock Openrtist: End-to-end benchmarking for edge computing.
+\newblock {\em IEEE Pervasive Computing}, 19(04):10--18, oct 2020.
+
+\bibitem{kubiak_possible_2022}
+Kacper Kubiak, Grzegorz Dec, and Dorota Stadnicka.
+\newblock Possible {Applications} of {Edge} {Computing} in the {Manufacturing} {Industry}—{Systematic} {Literature} {Review}.
+\newblock {\em Sensors (Basel, Switzerland)}, 22(7):2445, March 2022.
+
+\bibitem{liu_effects_2023}
+Shengmei Liu, Atsuo Kuwahara, James~J Scovell, and Mark Claypool.
+\newblock The {Effects} of {Frame} {Rate} {Variation} on {Game} {Player} {Quality} of {Experience}.
+\newblock In {\em Proceedings of the 2023 {CHI} {Conference} on {Human} {Factors} in {Computing} {Systems}}, {CHI} '23, pages 1--10, New York, NY, USA, April 2023. Association for Computing Machinery.
+
+\bibitem{liu_ssd_2016}
+Wei Liu, Dragomir Anguelov, Dumitru Erhan, Christian Szegedy, Scott Reed, Cheng-Yang Fu, and Alexander~C. Berg.
+\newblock {SSD}: {Single} {Shot} {MultiBox} {Detector}.
+\newblock volume 9905, pages 21--37. 2016.
+\newblock arXiv:1512.02325 [cs].
+
+\bibitem{NAYAK2024783}
+Sabuzima Nayak, Ripon Patgiri, Lilapati Waikhom, and Arif Ahmed.
+\newblock A review on edge analytics: Issues, challenges, opportunities, promises, future directions, and applications.
+\newblock {\em Digital Communications and Networks}, 10(3):783--804, 2024.
+
+\bibitem{sandler_mobilenetv2_2019}
+Mark Sandler, Andrew Howard, Menglong Zhu, Andrey Zhmoginov, and Liang-Chieh Chen.
+\newblock {MobileNetV2}: {Inverted} {Residuals} and {Linear} {Bottlenecks}, March 2019.
+\newblock arXiv:1801.04381 [cs].
+
+\bibitem{satyanarayanan_case_2009}
+Mahadev Satyanarayanan, Paramvir Bahl, Ramon Caceres, and Nigel Davies.
+\newblock The {Case} for {VM}-{Based} {Cloudlets} in {Mobile} {Computing}.
+\newblock {\em IEEE Pervasive Computing}, 8(4):14--23, October 2009.
+\newblock Conference Name: IEEE Pervasive Computing.
+
+\bibitem{7488250}
+Weisong Shi, Jie Cao, Quan Zhang, Youhuizi Li, and Lanyu Xu.
+\newblock Edge computing: Vision and challenges.
+\newblock {\em IEEE Internet of Things Journal}, 3(5):637--646, 2016.
+
+\end{thebibliography}

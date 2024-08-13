@@ -25,7 +25,7 @@
 }
 
 % About
-\title{Optimizing Microservice-based Applications for Hybrid Cloud Edge Networks}
+\title{The Effects of  Microservice-based Applications for Hybrid Cloud Edge Networks}
 \author{Yan (Oscar) Yu}
 \date{\today}
 
@@ -44,7 +44,7 @@ that software is developed effectively to take advantage of the benefits that ed
 brings to the table.
 \newline
 
-In this paper, we attempt to establish an understanding of core principles that will enable the 
+In this study, we attempt to establish an understanding of performance patterns that will enable the 
 effective design and development of distributed software systems that can be easily deployed and 
 optimized for various architectures of computing models -- primarily hybrid cloud edge networks.
 \newline
@@ -67,13 +67,37 @@ optimized for various architectures of computing models -- primarily hybrid clou
 
 \newpage
 \section{Introduction}
-
-\newpage
-\section{Background and Related Work}
-This thesis is based on existing work in multiple fields, including 
-\subsection{Cloud Computing}
 \subsection{Edge Computing}
+Edge computing is a computing paradigm in which compute and data operations live on and are cached
+on the network edge, in addition to traditional data caching provided by CDNs in the cloud computing
+paradigm \cite{kubiak_possible_2022}. Findings show that the main advantage of the edge computing model is 
+to reduce the time required to transfer large amounts of data to and from the cloud, as the 
+amount of data produced by IoT and other devices on the network edge continues to grow every year
+\cite{7488250}.
+This enormous amount of raw data being generated highlights weaknesses in the traditional cloud
+computing paradigm, as the bandwidth and network infrastructure required to transfer this becomes 
+increasingly great.\newline
+
+For real time applications like video analytics, 
+where the application demands the real-time ingest and processing of high-definition video sources \cite{NAYAK2024783},
+proposals have long been made to bring the cloud closer to the source devices \cite{satyanarayanan_case_2009}; thus reducing the
+necessary bandwidth and network latency of the system overall.\newline
+
+However, tradeoffs of bringing these operations to the network edge include limited computing 
+resources, storage, and processing power. In addition, modern software applications are often
+hosted remotely on servers and compute units operated by large corporations such as Amazon's AWS, 
+Google's GCP, or Microsoft's Azure through a PaaS (Platform-as-a-service) model, with edge
+resources being significantly more expensive than equivalent cloud offerings.
+
 \subsection{Microservice Architecture}
+Microservices are autonomous services deployed independently of each other, each performing some
+specific operation towards a single defined purpose \cite{auer_monolithic_2021}. Services can be developed and deployed
+independently of each other, maintaining only a shared communication interface. These properties
+make microservices ideal for deployment to distributed networks consisting of various edge
+or cloud nodes, as services can be independently deployed to the hardware or host that most 
+optimally supports its performance characteristics without affecting other parts of the 
+software system. These services are enabled by the use of containers or virtual machines (VMs)
+to support hardware agnostic deployments. \newline
 
 \newpage
 \section{Research Objectives}
@@ -90,7 +114,7 @@ This thesis is based on existing work in multiple fields, including
         network architectures
         }
     \item [(O4)] {
-        Understand how various hosting patterns can affect latency and user experience
+        Understand how various network architectures can affect latency and user experience
         }
 \end{itemize}
 
@@ -118,9 +142,9 @@ over 20 kilobytes of image data. (O2) \newline
 
 In a realistic scenario, 1080p real-time video analysis will require anywhere from 24-120 requests 
 per second. With a 1920x1080 snapshot being around 2 megabytes, this results in a lower bound for 
-bandwidth of of 384 Mbps, or an upper bound of 1.92 Gbps. As a result, this type of application is 
-an extremely good candidate for edge deployments, and could see significant improvements in
-various performance metrics. (O1, O2)
+bandwidth of of 384 Mbps, or an upper bound of 1.92 Gbps. As a result of this bandwidth bottleneck,
+this type of application is an extremely good candidate for edge deployments \cite{7488250}, and could see 
+significant improvements in various performance metrics versus a traditional cloud paradigm. (O1, O2)
 
 \subsubsection{Inference Service}
 To enable interfacing with a pre-trained object detection model, we leverage the open source
@@ -129,16 +153,16 @@ through a REST API or gRPC calls. This is a production ready system that introdu
 additional latency, making it suitable for the sample application.\newline
 
 The object detection model chosen for the sample application is a pre-trained copy of SSD 
-MobileNet v2, a multi-layer object detection model based on Google's MobileNetV2 CNN and the SSD 
-(Single Shot MultiBox Detector). Sourced from the TensorFlow Model Zoo, this was trained on the 
-COCO 2017 dataset. This model was chosen for its small size and ability to run on mobile CPUs, 
-which was a constraint due to limited cloud hosting resources available at the time of this thesis.
+MobileNet v2, a multi-layer object detection model based on Google's MobileNetV2 CNN \cite{sandler_mobilenetv2_2019} and the SSD 
+(Single Shot MultiBox Detector) \cite{liu_ssd_2016}. Sourced from the TensorFlow Model Zoo, this was trained on the 
+COCO 2017 dataset. This model was chosen for its small size and ability to run efficiently on lower
+spec CPUs, as compute power and memory are often constrained on edge devices or servers.
 \newline
 
 Despite the limited scale of this model, inference through a CNN (Convolutional Neural Network) 
 remains a compute intensive task that will likely be a performance bottleneck that scales with 
 hardware performance on the host device, as the process relies on large numbers (see: billions) 
-of parallel matrix operations. (O2)\newline
+of parallel matrix operations \cite{copeland_whats_2016}. (O2)\newline
 
 A note regarding the configuration of this service: while the option to run the service with GPU 
 acceleration was available, the CPU-only deployment was chosen to reduce additional variables 
@@ -197,21 +221,20 @@ a cloud host and locally, to emulate an edge server. (O3)
         Local Web Server \& Local Inference Service. This configuration represents a full edge 
         deployment, with minimal geographical distance and high bandwidth between all components.
         The web server and inference service shared a resource pool consisting of an AMD Ryzen 9 5900X
-        with 12 cores and 24 threads and 16GB of memory allocated to Docker.
+        with 12 cores and 16GB of memory allocated to Docker.
     }
     \item {
         Local Web Server \& Remote Inference Service. This configuration represents a hybrid
         cloud edge deployment, with the inference service being deployed via Docker image to a
-        Heroku instance running on a single Standard x2 Dyno, which is limited to 1GB of memory.
+        Heroku instance running on a single Performance-L Dyno, with 8 CPU cores and 14GB of memory.
     }
     \item {
         Remote Web Server \& Remote Inference Service. This configuration represents a cloud native
         deployment, with everything except the client running on independent Heroku instances.
-        Both components have independent access to 1GB of memory and a limited share of the server's CPU.
+        Both component are running on Performance-L Dynos, with access to 8 CPU cores and 14GB of
+        memory each.
     }
 \end{enumerate}
-
-
 
 \newpage
 \section{Results}
@@ -231,26 +254,119 @@ $$
 \capfigure[]{images/latency1}{Graph showing E2E latency of a single 
 video frame starting from the application client over 1000 samples. 
 (WS: Web Server; IS: Inference Service)}
-\capfigure[]{images/latency2}{Common benchmarking performance metrics for real time graphics.}
+Latency values were collected from the client application by calling the \lstinline|performance.now()|
+method to return a high resolution timestamp in milliseconds prior to each web server request,
+and immediately after drawing the detection boxes on the output canvas. As such, this measurement 
+includes time taken to capture a frame snapshot, the inference request, and the detection box rendering.
+
 \subsection{Latency Differences}
+\capfigure[]{images/latency3}{Common benchmarking performance metrics for real time graphics.}
+In Figure 3, we show several metrics for the latency samples collected from the three
+configurations of deployments described previously. These correspond to common graphics benchmarking
+metrics used for video games - another application in which users are highly sensitive to latency \cite{liu_effects_2023}.
+\newline
+
+Percentile values were generated in Microsoft Excel using the \lstinline|PERCENTILE.EXC()| 
+function to exclude the first and last values from the 1000 samples collected, as the first frame
+sample appeared to be non-representative of the set as a result of having to establish the 
+initial WebRTC connection from camera to client and the Session object for TCP connection between 
+the web server and inference service.\newline
+
+99th and 99.9th percentile values help illustrate consistency in E2E latency or frame timing,
+as they represent a reasonable lower bound for expected latency in the system. Large 
+deviations between average and 99 percentile values indicate the presence of stutters or spikes
+in latency that result in much longer frame times, degrading user experience. We can observe these
+visually in Figure 1 as large vertical spikes, particularly in the Local WS + Remote IS deployment.
 
 \newpage
 \section{Discussion}
 \subsection{Implications}
+These results can be used as a starting point to optimize real-time, microservice based applications.
+The specific latency results and performance data acquired from the testing performed are primarily
+applicable to real-time video analysis, particularly for those using machine learning inference 
+in order to perform image or object recognition. \newline
+
+From these observations of the latency data, there appears a clear connection between the latency 
+and the network architecture of an application -- especially in the case where the performance
+characteristics are skewed towards network I/O operations and bandwidth. We can use similar
+statistical metrics to further analyze other software applications, identifying the optimal or
+most performant network architectures for any specific use-case or business requirement.
+
 \subsection{Limitations and Generalizations}
-- Hardware limitations
-- Limited model selection
-- Relatively simple system design
-- Lack of edge deployments
-- No service level latency monitoring
-- Lack of cloud hardware control 
-- Only latency measurements, no hardware usage or identification of other bottlenecks
+Lack of flexibility in compute resources (see: no cloud GPU/TPU acceleration) limited the ability of
+this study to model common scenarios where traditional cloud computing offers similar or greater
+compute power at a reduced cost. With additional options for hardware acceleration, we could 
+perform similar tests with varying levels of computing power for each component to provide a 
+significantly more nuanced analysis of how to extrapolate an optimal network architecture based on 
+various server configurations.\newline
+
+Additionally, the test results in this study may have been impacted by the use of a local deployment
+in lieu of a dedicated edge compute server. By deploying the local components to an actual edge
+service like AWS Wavelength, we could rerun the tests to greatly improve the accuracy and applicability
+of the results.\newline
+
+The results of this study can be generalized to other software applications utilizing CNNs to perform
+video analysis, and the conclusions reached regarding the effects of network architecture
+on latency can be used to support the optimization of other distributed microservice-architecture 
+applications. Testing performed in this study can be repeated for any containerized microservice 
+to determine the effect of various network architectures on the E2E latency of the system to 
+support the conclusions found here.
 
 \newpage
 \section{Conclusions and Future Work}
-- Perform more analysis with more performance analytics
+In performing this study, we aimed to identify factors that contributed towards the performance
+of a software application when deployed to the cloud and edge devices in various configurations.
+Objectives included identifying the types of applications that benefit from edge deployments and
+the performance characteristics of those applications (O1, O2); understanding the development
+process of an application designed for deployment across different network architectures (O3); and
+understanding how combinations of cloud and edge deployments can affect latency and user experience (O4).
+\newline
+
+Key results and conclusions:
+
+\begin{enumerate}
+    \item {
+        Not all applications are equal. Performance characteristics such as heavy bandwidth
+        and CPU resource dependencies can greatly impact the influence of network architectures
+        on overall latency.
+    }
+    \item {
+        E2E latency of a networked system is heavily influenced by the proximity and latency of 
+        bandwidth heavy components. This is supported by the latency values being measurably lower 
+        for configurations where the web server component and inference service were deployed on 
+        a shared network, despite a lower bandwidth connection to the client in the full cloud 
+        deployment scenario.
+    }
+    \item {
+        Edge deployments exhibit significantly lower and more consistent latency results than 
+        cloud solutions, supporting the conclusion that edge computing offers significant advantages
+        over a cloud computing paradigm, especially for real-time applications such as video
+        or image analytics.
+    }
+    \item {
+        Network architecture optimization can be an effective tool to improve the performance of
+        a software system, as supported by the significant differences in latency seen between
+        the edge native, hybrid cloud edge, and cloud native deployments.
+    }
+\end{enumerate}
+
+Future extensions to the testing and research conducted in this thesis include:
+\begin{itemize}
+    \item {
+        Incorporating additional performance metrics such as \emph{motion-to-photon} latency \cite{9229154}.
+        Additional metrics such as these help provide a more accurate picture of how the user
+        experience is affected by changes in network architecture.
+        } 
+    \item {
+        Perform testing on commercial edge computing platforms such as AWS Wavelength to identify
+        whether local deployments can be an effective proxy for the edge during application 
+        development and optimization.
+    }
+\end{itemize}
 
 \newpage
 \section{Reference List}
+\bibliographystyle{plain}
+\bibliography{sources}
 
 \end{document}
